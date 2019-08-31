@@ -1,0 +1,71 @@
+{
+  "info": {
+    "title": "#_TITLE",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Compose an aggregate root",
+        "description": "Map reduces all events for the given root, making use of snapshots for caching.",
+        "security": [],
+        "parameters": [
+          {
+            "name": "root",
+            "in": "query",
+            "description": "The root to aggregate.",
+            "type": "string"
+          },
+          {
+            "name": "store",
+            "in": "query",
+            "description": "The id of the store where to look for the root.",
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "in": "query",
+            "description": "The service that generated the event.",
+            "type": "string"
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "description": "the aggregate of the root passed in.",
+              "properties": {}
+            }
+          },
+          "400": {
+            "description": "The request wasn't formatted correctly."
+          },
+          "401": {
+            "description": "The request wasn't authorized."
+          },
+          "404": {
+            "description": "The function doesn't exist."
+          },
+          "405": {
+            "description": "The method on the requested services doesn't exist."
+          },
+          "409": {
+            "description": "A user specified value was not valid."
+          },
+          "500": {
+            "description": "The server errored unexpectedly. If you receive this error, report it to us immediately."
+          }
+        },
+        "deprecated": false,
+        "operationId": "#_AGGREGATE_NAME"
+      }
+    }
+  },
+  "schemes": ["https"],
+  "basePath": "/v1/",
+  "swagger": "2.0",
+  "host": "#_HOST"
+}

@@ -1,0 +1,104 @@
+{
+  "substitutions": {
+    "_TITLE": "Hydrate Aggregate Root",
+    "_SERVICE": "core",
+    "_NETWORK": "sustainer.network",
+    "_GCP_PROJECT": "sustainernetwork",
+    "_GCP_REGION": "us-central1",
+    "_GCP_DNS_ZONE": "network",
+    "_ESP_OPTIONS": "--cors_preset=basic,--cors_allow_methods=GET,--cors_allow_headers=Authorization Content-Type,--cors_allow_credentials",
+    "_MEMORY": "128Mi"
+  },
+  "steps": [
+    {
+      "name": "gcr.io/cloud-builders/docker",
+      "entrypoint": "bash",
+      "args": [
+        "-c",
+        "docker build -t us.gcr.io/staging-${_GCP_PROJECT}/${_SERVICE}.event-store.aggregate ."
+      ]
+    },
+    {
+      "name": "gcr.io/cloud-builders/docker",
+      "entrypoint": "bash",
+      "args": [
+        "-c",
+        "docker push us.gcr.io/staging-${_GCP_PROJECT}/${_SERVICE}.event-store.aggregate"
+      ]
+    },
+    {
+      "name": "gcr.io/cloud-builders/gcloud",
+      "entrypoint": "bash",
+      "args": [
+        "-c",
+        "gcloud beta run deploy ${_SERVICE}-event-store-aggregate --image=us.gcr.io/staging-${_GCP_PROJECT}/${_SERVICE}.event-store.aggregate --platform=managed --memory=${_MEMORY} --allow-unauthenticated --project=staging-${_GCP_PROJECT} --region=${_GCP_REGION} --set-env-vars=NODE_ENV=staging,NETWORK=${_NETWORK},SERVICE=${_SERVICE},ACTION=${_ACTION},DOMAIN=${_DOMAIN},GCP_PROJECT=${_GCP_PROJECT},GCP_REGION=${_GCP_REGION}"
+      ]
+    },
+    {
+      "name": "gcr.io/cloud-builders/gcloud",
+      "entrypoint": "bash",
+      "args": [
+        "-c",
+        "gcloud beta dns record-sets transaction start --zone=${_GCP_DNS_ZONE} --project=${_GCP_PROJECT}"
+      ]
+    },
+    {
+      "name": "gcr.io/cloud-builders/gcloud",
+      "entrypoint": "bash",
+      "args": [
+        "-c",
+        "gcloud beta dns record-sets transaction add ghs.googlehosted.com. --name=aggregate.event-store.${_SERVICE}.staging.${_NETWORK} --zone=${_GCP_DNS_ZONE} --type=CNAME --ttl=300 --project=${_GCP_PROJECT}"
+      ]
+    },
+    {
+      "name": "gcr.io/cloud-builders/gcloud",
+      "entrypoint": "bash",
+      "args": [
+        "-c",
+        "gcloud beta dns record-sets transaction execute --zone=${_GCP_DNS_ZONE} --project=${_GCP_PROJECT} || exit 0"
+      ]
+    },
+    {
+      "name": "gcr.io/cloud-builders/gcloud",
+      "entrypoint": "bash",
+      "args": [
+        "-c",
+        "gcloud beta dns record-sets transaction abort --zone=${_GCP_DNS_ZONE} --project=${_GCP_PROJECT} || exit 0"
+      ]
+    },
+    {
+      "name": "gcr.io/cloud-builders/gcloud",
+      "entrypoint": "bash",
+      "args": [
+        "-c",
+        "gcloud beta run domain-mappings create --platform=managed --service=${_SERVICE}-event-store-aggregate --domain=aggregate.event-store.${_SERVICE}.staging.${_NETWORK} --project=staging-${_GCP_PROJECT} --region=${_GCP_REGION} || exit 0"
+      ]
+    },
+    {
+      "name": "gcr.io/cloud-builders/gcloud",
+      "entrypoint": "bash",
+      "args": [
+        "-c",
+        "sed -e 's/#_NAME/${_SERVICE}-event-store-aggregate/g; s/#_HOST/aggregate.event-store.${_SERVICE}.staging.${_NETWORK}/g; s/#_TITLE/${_TITLE}/g;' doc.json > doc.staging.json"
+      ]
+    },
+    {
+      "name": "gcr.io/cloud-builders/gcloud",
+      "entrypoint": "bash",
+      "args": [
+        "-c",
+        "gcloud beta run services update ${_SERVICE}-event-store-aggregate --platform=managed --project=staging-${_GCP_PROJECT} --region=${_GCP_REGION} --update-env-vars=\"^|^ESP_ARGS=--rollout_strategy=managed,${_ESP_OPTIONS}\""
+      ]
+    },
+    {
+      "name": "node:10.16.0",
+      "entrypoint": "yarn",
+      "args": ["install"]
+    },
+    {
+      "name": "node:10.16.0",
+      "entrypoint": "yarn",
+      "args": ["test"]
+    }
+  ]
+}
