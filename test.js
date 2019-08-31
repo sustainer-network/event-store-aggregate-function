@@ -9,6 +9,7 @@ const addUrl = "https://add.event-store.core.staging.sustainer.network";
 const domain = "domain";
 const _service = "the-service-which-stores-this-event";
 const service = "the-service-from-which-this-event-originated";
+const network = "some-network";
 
 describe("Event store", () => {
   it("should get aggregates successfully", async () => {
@@ -25,10 +26,13 @@ describe("Event store", () => {
       domain,
       service: _service,
       event: {
+        context: {
+          service,
+          network
+        },
         fact: {
           root,
           topic: "did-nothing.core",
-          service,
           version: 0,
           traceId: "a-trace-id",
           command: {
@@ -54,10 +58,13 @@ describe("Event store", () => {
       domain,
       service: _service,
       event: {
+        context: {
+          service,
+          network
+        },
         fact: {
           root,
           topic: "did-nothing.core",
-          service,
           version: 0,
           traceId: "a-trace-id",
           command: {
@@ -96,10 +103,13 @@ describe("Event store", () => {
       domain,
       service: _service,
       event: {
+        context: {
+          service,
+          network
+        },
         fact: {
           root,
           topic: "did-nothing.core",
-          service,
           version: 0,
           traceId: "a-trace-id",
           command: {
@@ -125,10 +135,13 @@ describe("Event store", () => {
       domain,
       service: _service,
       event: {
+        context: {
+          service,
+          network
+        },
         fact: {
           root,
           topic: "did-nothing.core",
-          service,
           version: 0,
           traceId: "a-trace-id",
           command: {

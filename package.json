@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "express": "^4.17.1",
-    "@sustainer-network/event-store-hydrate-service": "*",
+    "@sustainer-network/event-store-aggregate-service": "*",
     "@sustainer-network/tokens-from-req": "*",
     "@sustainer-network/event-store-middleware": "*",
     "@sustainer-network/logger": "*"
