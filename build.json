@@ -31,7 +31,7 @@
       "entrypoint": "bash",
       "args": [
         "-c",
-        "gcloud beta run deploy ${_SERVICE}-event-store-aggregate --image=us.gcr.io/staging-${_GCP_PROJECT}/${_SERVICE}.event-store.aggregate --platform=managed --memory=${_MEMORY} --allow-unauthenticated --project=staging-${_GCP_PROJECT} --region=${_GCP_REGION} --set-env-vars=NODE_ENV=staging,NETWORK=${_NETWORK},SERVICE=${_SERVICE},ACTION=${_ACTION},DOMAIN=${_DOMAIN},GCP_PROJECT=${_GCP_PROJECT},GCP_REGION=${_GCP_REGION}"
+        "gcloud beta run deploy ${_SERVICE}-event-store-aggregate --image=us.gcr.io/staging-${_GCP_PROJECT}/${_SERVICE}.event-store.aggregate --platform=managed --memory=${_MEMORY} --allow-unauthenticated --project=staging-${_GCP_PROJECT} --region=${_GCP_REGION} --set-env-vars=NODE_ENV=staging,NETWORK=${_NETWORK},SERVICE=${_SERVICE},GCP_PROJECT=${_GCP_PROJECT},GCP_REGION=${_GCP_REGION},STORE_INSTANCE=event-store"
       ]
     },
     {

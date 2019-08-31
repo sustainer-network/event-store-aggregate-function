@@ -2,10 +2,13 @@
   "name": "@sustainer-network/event-store-add-function",
   "version": "0.0.0",
   "dependencies": {
+    "express": "^4.17.1",
     "@sustainer-network/event-store-hydrate-service": "*",
-    "@sustainer-network/tokens-from-req": "*"
+    "@sustainer-network/tokens-from-req": "*",
+    "@sustainer-network/event-store-middleware": "*"
   },
   "scripts": {
+    "start": "node index.js",
     "precommit": "lint-staged && yarn checkbuild",
     "test": "mocha --recursive --timeout 40000",
     "checkbuild": "./.checkbuild.sh"
