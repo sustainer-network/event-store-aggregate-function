@@ -27,7 +27,7 @@ describe("Event store", () => {
       event: {
         fact: {
           root,
-          topic: "did-nothing.core.staging",
+          topic: "did-nothing.core",
           service,
           version: 0,
           traceId: "a-trace-id",
@@ -56,7 +56,7 @@ describe("Event store", () => {
       event: {
         fact: {
           root,
-          topic: "did-nothing.core.staging",
+          topic: "did-nothing.core",
           service,
           version: 0,
           traceId: "a-trace-id",
@@ -98,7 +98,7 @@ describe("Event store", () => {
       event: {
         fact: {
           root,
-          topic: "did-nothing.core.staging",
+          topic: "did-nothing.core",
           service,
           version: 0,
           traceId: "a-trace-id",
@@ -127,7 +127,7 @@ describe("Event store", () => {
       event: {
         fact: {
           root,
-          topic: "did-nothing.core.staging",
+          topic: "did-nothing.core",
           service,
           version: 0,
           traceId: "a-trace-id",
