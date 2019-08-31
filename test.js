@@ -48,7 +48,7 @@ describe("Event store", () => {
       service: _service,
       root
     });
-    expect(aggregate0).to.deep.equal(JSON.stringify({ a: "1", b: "1" }));
+    expect(aggregate0).to.deep.equal(JSON.stringify({ a: 1, b: 1 }));
 
     await post(`${addUrl}`, {
       domain,
@@ -78,9 +78,7 @@ describe("Event store", () => {
       service: _service,
       root
     });
-    expect(aggregate1).to.deep.equal(
-      JSON.stringify({ a: "1", b: "2", c: "1" })
-    );
+    expect(aggregate1).to.deep.equal(JSON.stringify({ a: 1, b: 2, c: 1 }));
   });
   it("should get aggregates successfully when two events with the same timestamp are inserted", async () => {
     const root = uuid();
@@ -121,7 +119,7 @@ describe("Event store", () => {
       service: _service,
       root
     });
-    expect(aggregate0).to.deep.equal(JSON.stringify({ a: "1", b: "1" }));
+    expect(aggregate0).to.deep.equal(JSON.stringify({ a: 1, b: 1 }));
 
     await post(`${addUrl}`, {
       domain,
@@ -151,7 +149,7 @@ describe("Event store", () => {
       service: _service,
       root
     });
-    expect(aggregate1).to.deep.equal(JSON.stringify({ b: "2", c: "1" }));
+    expect(aggregate1).to.deep.equal(JSON.stringify({ b: 2, c: 1 }));
   });
   it("should return an error if aggregate has incorrect query params", async () => {
     const response = await get(`${aggregateUrl}`, {});
