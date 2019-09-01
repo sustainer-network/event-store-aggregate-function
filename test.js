@@ -41,7 +41,7 @@ describe("Event store", () => {
             service: _service,
             issuedTimestamp: 123
           },
-          createdTimestamp: 123
+          createdTimestamp: 333
         },
         payload: payload1
       }
