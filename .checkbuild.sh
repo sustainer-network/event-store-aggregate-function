@@ -1,2 +1,2 @@
-sed -e 's/#_ADD_NAME/domain-staging-event-store-add/g; s/#_AGGREGATE_NAME/domain-staging-event-store-aggregate/g; s/#_HOST/event-store.core.staging.sustainer.network/g; s/#_GCP_PROJECT/sustainernetwork/g; s/#_GCP_REGION/us-central1/g; s/#_TITLE/Staging Title/g' doc.json > doc.staging.json
+sed -e 's/#_ADD_NAME/domain-staging-event-store-add/g; s/#_AGGREGATE_NAME/domain-staging-event-store-aggregate/g; s/#_HOST/event-store.core.staging.sustainer.network/g; s/#_GCP_PROJECT/sustainers/g; s/#_GCP_REGION/us-central1/g; s/#_TITLE/Staging Title/g' doc.json > doc.staging.json
 gcloud endpoints services deploy doc.staging.json --validate-only && rm doc.staging.json

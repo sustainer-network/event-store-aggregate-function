@@ -1,12 +1,12 @@
 {
-  "name": "@sustainer-network/event-store-add-function",
+  "name": "@sustainers/event-store-add-function",
   "version": "0.0.0",
   "dependencies": {
     "express": "^4.17.1",
-    "@sustainer-network/event-store-aggregate-service": "*",
-    "@sustainer-network/tokens-from-req": "*",
-    "@sustainer-network/event-store-middleware": "*",
-    "@sustainer-network/logger": "*"
+    "@sustainers/event-store-aggregate-service": "*",
+    "@sustainers/tokens-from-req": "*",
+    "@sustainers/event-store-middleware": "*",
+    "@sustainers/logger": "*"
   },
   "scripts": {
     "start": "node index.js",
@@ -15,8 +15,8 @@
     "checkbuild": "./.checkbuild.sh"
   },
   "devDependencies": {
-    "@sustainer-network/request": "*",
-    "@sustainer-network/uuid": "*",
+    "@sustainers/request": "*",
+    "@sustainers/uuid": "*",
     "mocha": "^6.1.4",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",

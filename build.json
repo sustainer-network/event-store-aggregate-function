@@ -2,10 +2,10 @@
   "substitutions": {
     "_TITLE": "Hydrate Aggregate Root",
     "_SERVICE": "core",
-    "_NETWORK": "sustainer.network",
-    "_GCP_PROJECT": "sustainernetwork",
+    "_NETWORK": "sustainers.io",
+    "_GCP_PROJECT": "sustainers",
     "_GCP_REGION": "us-central1",
-    "_GCP_DNS_ZONE": "network",
+    "_GCP_DNS_ZONE": "io",
     "_ESP_OPTIONS": "--cors_preset=basic,--cors_allow_methods=GET,--cors_allow_headers=Authorization Content-Type,--cors_allow_credentials",
     "_MEMORY": "128Mi"
   },

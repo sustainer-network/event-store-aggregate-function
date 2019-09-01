@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
 
-const hydrate = require("@sustainer-network/event-store-aggregate-service");
-const tokensFromReq = require("@sustainer-network/tokens-from-req");
-const middleware = require("@sustainer-network/event-store-middleware");
-const logger = require("@sustainer-network/logger");
+const hydrate = require("@sustainers/event-store-aggregate-service");
+const tokensFromReq = require("@sustainers/tokens-from-req");
+const middleware = require("@sustainers/event-store-middleware");
+const logger = require("@sustainers/logger");
 
 middleware(app);
 
