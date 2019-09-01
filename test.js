@@ -2,9 +2,8 @@ const { expect } = require("chai");
 const { post, get } = require("@sustainers/request");
 const uuid = require("@sustainers/uuid");
 
-const aggregateUrl =
-  "https://aggregate.event-store.core.staging.sustainer.network";
-const addUrl = "https://add.event-store.core.staging.sustainer.network";
+const aggregateUrl = "https://aggregate.event-store.core.staging.sustainers.io";
+const addUrl = "https://add.event-store.core.staging.sustainers.io";
 
 const domain = "domain";
 const _service = "the-service-which-stores-this-event";
