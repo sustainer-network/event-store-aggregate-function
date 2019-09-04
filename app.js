@@ -11,10 +11,7 @@ middleware(app);
 app.get("/", (req, res) => {
   hydrate({ params: req.query, token: tokensFromReq(req) })
     .then(aggregateRoot => res.send(aggregateRoot))
-    .catch(e => {
-      logger.error("eee: ", { e, stack: e.stack });
-      res.status(e.statusCode || 500).send(e);
-    });
+    .catch(e => res.status(e.statusCode || 500).send(e));
 });
 
 module.exports = app;
